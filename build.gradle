@@ -22,10 +22,23 @@ repositories {
         name 'CB Maven FS'
         url "http://chickenbones.net/maven/"
     }
+	maven {
+		name = "ic2-and-forestry"
+		url = "http://maven.ic2.player.to/"
+	}
     maven {
         name 'ForgeFS'
         url 'http://files.minecraftforge.net/maven'
      }
+    maven {
+        name "Mobius"
+        url "http://mobiusstrip.eu/maven"
+    }
+    ivy {
+        name "BuildCraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
+    }
+
 }
 
 apply plugin: 'idea'
@@ -50,6 +63,10 @@ configFile.withReader {
 }
 
 dependencies {
+	compile "net.industrial-craft:industrialcraft-2:${config.IC2_version}:api"
+	compile "com.mod-buildcraft:buildcraft:${config.BUILDCRAFT_version}:dev"
+	compile "mcp.mobius.waila:Waila:${config.WAILA_version}_${config.minecraft_version}:dev"
+	
     compile "codechicken:CodeChickenLib:${config.minecraft_version}-${config.CCLIB_version}:dev"
     compile "codechicken:ForgeMultipart:${config.minecraft_version}-${config.FMP_version}:dev"
     compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.NEI_version}:dev"
