@@ -26,24 +26,34 @@ public class FastModelBase extends ModelBase
 		
 	} // end ModelBase()
 	
+	protected int getSubDisplayList(){
+			return subDisplayList;
+	} // end getSubDispalyList()
+	
+	protected void setSubDisplayList(int dl){
+		subDisplayList = dl;
+		subCompiled = true;
+	} // end setSubDisplayList()
+		
+	protected boolean isCompiled(){
+		return subCompiled;
+	} // end isCompiled()
 	
 	public void addSubRenderer(ModelRenderer sub){
 		subList.add(sub);
 	} // end addSubRenderer()
 
-
 	public void renderAllSubs(float size){
 		
 		// Simple Debug Code:
-		if(subCompiled == false){
+		if(isCompiled() == false){
 			compileSubDisplayList(size);
 		}
 		
-		GL11.glCallList(this.subDisplayList);
+		GL11.glCallList( getSubDisplayList() );
 		
 	} // end renderAllSubs()
 	
-
 	public void render(float size){	// Mekanism Speciifc Routine
 		renderAllSubs(size);
 	} // end render()
@@ -51,8 +61,8 @@ public class FastModelBase extends ModelBase
 	public void compileSubDisplayList(float size){
 		Tessellator tessellator = Tessellator.instance;
 				
-		this.subDisplayList = GLAllocation.generateDisplayLists(1);
-		GL11.glNewList(this.subDisplayList, GL11.GL_COMPILE);
+		int dl = GLAllocation.generateDisplayLists(1);
+		GL11.glNewList(dl, GL11.GL_COMPILE);
 		
 		int sz = subList.size();
 		int j;
@@ -107,7 +117,8 @@ public class FastModelBase extends ModelBase
 		
 		GL11.glEndList();
 		
-		subCompiled = true;		
+		setSubDisplayList(dl);
+	
 	}// end compileSubDisplaylist()
 	
 }
