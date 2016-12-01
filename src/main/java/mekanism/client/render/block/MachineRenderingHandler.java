@@ -20,7 +20,6 @@ import mekanism.client.model.ModelQuantumEntangloporter;
 import mekanism.client.model.ModelResistiveHeater;
 import mekanism.client.model.ModelRotaryCondensentrator;
 import mekanism.client.model.ModelSeismicVibrator;
-import mekanism.client.model.ModelSolarNeutronActivator;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.common.block.BlockMachine.MachineType;
 import mekanism.common.util.MekanismUtils;
@@ -28,8 +27,11 @@ import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
-
+import net.minecraftforge.client.model.AdvancedModelLoader;		
+import net.minecraftforge.client.model.IModelCustom;
+ 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -58,7 +60,7 @@ public class MachineRenderingHandler implements ISimpleBlockRenderingHandler
 	public ModelFluidicPlenisher fluidicPlenisher = new ModelFluidicPlenisher();
 	public ModelLaser laser = new ModelLaser();
 	public ModelLaserAmplifier laserAmplifier = new ModelLaserAmplifier();
-	public ModelSolarNeutronActivator solarNeutronActivator = new ModelSolarNeutronActivator();
+	public IModelCustom solarNeutronActivator = AdvancedModelLoader.loadModel(new ResourceLocation("mekanism:models/solar_tri.obj"));
 	public ModelResistiveHeater resistiveHeater = new ModelResistiveHeater();
 	public ModelQuantumEntangloporter quantumEntangloporter = new ModelQuantumEntangloporter();
 
@@ -230,10 +232,10 @@ public class MachineRenderingHandler implements ISimpleBlockRenderingHandler
 		{
 			GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 			GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
-			GL11.glScalef(0.6F, 0.6F, 0.6F);
-			GL11.glTranslatef(0.0F, -0.55F, 0.0F);
+			GL11.glScalef(0.45F, 0.45F, 0.45F);
+			GL11.glTranslatef(0.0F, -1.3F, 0.0F);
 			mc.renderEngine.bindTexture(MekanismUtils.getResource(ResourceType.RENDER, "SolarNeutronActivator.png"));
-			solarNeutronActivator.render(0.0625F);
+			solarNeutronActivator.renderAll();
 		}
 		else if(type == MachineType.QUANTUM_ENTANGLOPORTER)
 		{
