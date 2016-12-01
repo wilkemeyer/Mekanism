@@ -214,7 +214,7 @@ public class GuiReactorFuel extends GuiMekanism
 		String prevRad = injectionRateField != null ? injectionRateField.getText() : "";
 
 		injectionRateField = new GuiTextField(fontRendererObj, guiWidth + 98, guiHeight + 115, 26, 11);
-		injectionRateField.setMaxStringLength(2);
+		injectionRateField.setMaxStringLength(3);
 		injectionRateField.setText(prevRad);
 	}
 }
